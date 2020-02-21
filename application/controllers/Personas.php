@@ -61,10 +61,16 @@ class Personas extends CI_Controller {
         $this->load->view('personas/guardar', $vdata);
     }
 
-    public function borrar($persona_id) {
+    public function borrar($persona_id = null) {
         $this->Persona->delete($persona_id);
         
         redirect("/personas/listado");
+    }
+    
+    public function borrar_ajax($persona_id = null) {
+        $this->Persona->delete($persona_id);
+        
+        echo 1;
     }
 
     public function ver($persona_id = null) {
