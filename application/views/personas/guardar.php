@@ -13,7 +13,7 @@
             
             <?php echo validation_errors(); ?>
             
-            <?php echo form_open(''); ?>
+            <?php echo form_open_multipart('');?>
 
             <div class="form-group">
                 <?php
@@ -54,6 +54,22 @@
                         'name'  =>  'edad',
                         'id'    =>  'edad',
                         'value' =>  $edad,
+                        'class' =>  'form-control input-lg'
+                    );
+
+                    echo form_input($input);
+                ?>
+            </div>
+            
+            <div class="form-group">
+                <?php
+
+                    echo form_label('Imagen', 'image');
+                    $input = array(
+                        'type'  =>  'file',
+                        'name'  =>  'image',
+                        'id'    =>  'image',
+                        'value' =>  '',
                         'class' =>  'form-control input-lg'
                     );
 
