@@ -11,6 +11,14 @@ class Personas extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->database();
     }
+    
+    function llamar_helper(){
+        $this->load->helper('list_person_helper');
+        
+        //var_dump(list_person());
+        $vdata["personas"] = list_person();
+        $this->load->view('personas/llamar_helper', $vdata);
+    }
 
     function index() {
         redirect("/personas/listado");
