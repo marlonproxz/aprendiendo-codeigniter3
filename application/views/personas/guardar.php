@@ -11,7 +11,17 @@
             <a href="<?php echo base_url(); ?>personas/listado" class="btn btn-success">Regresar</a>
             <br><br>
             
-            <?php echo validation_errors(); ?>
+            <?php if(validation_errors() != ""): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo validation_errors(); ?>
+                </div>
+            <?php endif; ?>
+            
+            <?php if($error != ""): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
             
             <?php echo form_open_multipart('');?>
 
