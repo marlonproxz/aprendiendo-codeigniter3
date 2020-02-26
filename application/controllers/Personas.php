@@ -27,7 +27,7 @@ class Personas extends CI_Controller {
         $this->form_validation->set_rules('apellido', 'Apellido', 'required');
         $this->form_validation->set_rules('edad', 'Edad', 'required');
 
-        $error = $vdata["nombre"] = $vdata["apellido"] = $vdata["edad"] = "";
+        $error = $vdata["image"] = $vdata["nombre"] = $vdata["apellido"] = $vdata["edad"] = "";
         if (isset($persona_id)) {
 
             $persona = $this->Persona->find($persona_id);
@@ -36,6 +36,7 @@ class Personas extends CI_Controller {
                 $vdata["nombre"] = $persona->nombre;
                 $vdata["apellido"] = $persona->apellido;
                 $vdata["edad"] = $persona->edad;
+                $vdata["image"] = $persona->image;
             }
         }
 

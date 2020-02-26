@@ -2,6 +2,14 @@
     <head>
         <title>title</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <style>
+            .img-small{
+                width: 180px;
+                display: block;
+                border: 1px solid #CCC;
+                margin: 4px 0;
+            }
+        </style>
     </head>
     <body>
         
@@ -86,6 +94,10 @@
                     echo form_input($input);
                 ?>
             </div>
+            
+            <?php if($image != ""):?>
+            <img class="img-small" src="<?php echo base_url();?>uploads/<?php echo $image;?>">
+            <?php endif; ?>
             
             <?php 
                 echo form_submit('mysybumit', 'Enviar', "class='btn btn-primary'");
