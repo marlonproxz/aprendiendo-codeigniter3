@@ -23,11 +23,15 @@ class Personas extends CI_Controller {
 
     function index() {
         //$this->session->set_userdata('item', 'PS4');
-        echo $this->session->userdata('item');
-        //redirect("/personas/listado");
+        //echo $this->session->userdata('item');
+        $this->session->set_flashdata('item', 'value');
+        
+        redirect("/personas/listado");
     }
 
     public function listado() {
+        
+        //echo $this->session->flashdata('item');
         
         /*$newdata = array(
         'username'  => 'johndoe',
@@ -80,10 +84,11 @@ class Personas extends CI_Controller {
                 } else
                     $persona_id = $this->Persona->insert($data);
                 
-                $error = $this->do_upload($persona_id);
+                //$error = $this->do_upload($persona_id);
                 
-                if($error === "")
-                    redirect("/personas/guardar/$persona_id");
+                //if($error === "")
+                $this->session->set_flashdata('message', 'Guardado exitoso de '. $vdata["nombre"]);
+                redirect("/personas/guardar/$persona_id");
             }
         }
         
