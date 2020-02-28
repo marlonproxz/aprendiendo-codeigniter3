@@ -8,6 +8,7 @@ class Personas extends CI_Controller {
         $this->load->helper("url");
         $this->load->model('Persona');
 
+        //$this->load->library('session');
         $this->load->library('form_validation');
         $this->load->database();
     }
@@ -21,10 +22,24 @@ class Personas extends CI_Controller {
     }
 
     function index() {
-        redirect("/personas/listado");
+        //$this->session->set_userdata('item', 'PS4');
+        echo $this->session->userdata('item');
+        //redirect("/personas/listado");
     }
 
     public function listado() {
+        
+        /*$newdata = array(
+        'username'  => 'johndoe',
+        'email'     => 'johndoe@some-site.com',
+        'logged_in' => TRUE
+        );
+
+        $this->session->set_userdata($newdata);*/
+        
+        echo $this->session->userdata('name');
+        $this->session->unset_userdata('name');
+        
         $vdata["personas"] = $this->Persona->findAll();
         $this->load->view('personas/listado', $vdata);
     }
