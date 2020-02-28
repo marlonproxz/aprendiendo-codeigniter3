@@ -88,7 +88,8 @@ class Personas extends CI_Controller {
                 
                 //if($error === "")
                 $this->session->set_flashdata('message', 'Guardado exitoso de '. $vdata["nombre"]);
-                redirect("/personas/guardar/$persona_id");
+                //redirect("/personas/guardar/$persona_id");
+                redirect("/personas/listado");
             }
         }
         

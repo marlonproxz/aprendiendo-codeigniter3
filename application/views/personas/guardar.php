@@ -107,12 +107,5 @@
             
         </div>
         
-        <?php if($this->session->flashdata('message') != null) :?>
-        
-            <script>
-                alert("<?php echo $this->session->flashdata('message'); ?>");
-            </script>
-        
-        <?php endif; ?>
     </body>
 </html>

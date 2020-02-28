@@ -2,6 +2,7 @@
     <head>
         <title>title</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
     </head>
     <body>
 
@@ -57,7 +58,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -66,10 +67,11 @@
                     </div>
                 </div>
             </div>
-            
-            <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+            <script src="<?php echo base_url(); ?>assets/js/jquery-3.4.1.min"></script>
+            <script src="<?php echo base_url(); ?>assets/js/jquery.toaster"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-            
+
             <script>
                 var id;
                 var link;
@@ -83,19 +85,27 @@
                     var modal = $(this)
                     modal.find('.modal-title span').text(name);
                 })
-                
-                $("#b-borrar").click(function (){
-                   // console.log("click", id); 
-                   $.ajax({
-                       url: "<?php echo base_url(); ?>personas/borrar_ajax/"+id,
-                       context: document.body
-                   }).done(function (res){
-                       console.log(res);
-                       $('#DeletePerson').modal('hide');
-                       $(link).parent().parent().remove();
-                   });
+
+                $("#b-borrar").click(function () {
+                    // console.log("click", id); 
+                    $.ajax({
+                        url: "<?php echo base_url(); ?>personas/borrar_ajax/" + id,
+                        context: document.body
+                    }).done(function (res) {
+                        console.log(res);
+                        $('#DeletePerson').modal('hide');
+                        $(link).parent().parent().remove();
+                    });
                 });
             </script>
+
+            <?php if ($this->session->flashdata('message') != null) : ?>
+
+                <script>
+                    $.toaster({ message : '<?php echo $this->session->flashdata('message'); ?>', title : 'Mensaje' });
+                </script>
+
+            <?php endif; ?>
         </div>
     </body>
 </html>
