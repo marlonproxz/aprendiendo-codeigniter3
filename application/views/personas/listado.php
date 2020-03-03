@@ -1,12 +1,12 @@
 <br>
-<a href="guardar" class="btn btn-success">Guardar</a>
+<a href="<?php echo base_url();?>personas/guardar" class="btn btn-success">Guardar</a>
 <br><br>
 
-<form method="get">
+<form method="get" action="<?php echo base_url();?>personas/buscar_listado">
     <div class="input-group mb-3">
-        <input name="nombre" type="text" class="form-control" placeholder="Recipient's username" aria-label="Filtrar" aria-describedby="basic-addon2">
+        <input name="nombre" type="text" value="<?php echo $nombre; ?>" class="form-control" placeholder="Buscar." aria-label="Filtrar">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit">Button</button>
+            <button class="btn btn-outline-secondary" type="submit">Enviar</button>
         </div>
     </div>
 </form>
@@ -29,8 +29,8 @@
                 <td><?php echo $p->apellido; ?></td>
                 <td><?php echo $p->edad; ?></td>
                 <td>
-                    <a href="guardar/<?php echo $p->persona_id; ?>">Editar</a><br>
-                    <a href="ver/<?php echo $p->persona_id; ?>">Ver</a><br>
+                    <a href="<?php echo base_url();?>personas/guardar/<?php echo $p->persona_id; ?>">Editar</a><br>
+                    <a href="<?php echo base_url();?>personas/ver/<?php echo $p->persona_id; ?>">Ver</a><br>
                     <a href="#" 
                        data-toggle="modal" 
                        data-target="#DeletePerson" 
@@ -62,13 +62,13 @@
         
     ?>  
       
-    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $prev; ?>">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $prev; ?>?nombre=<?php echo $nombre; ?>">Previous</a></li>
     
     <?php for($i=1; $i<= $last_page; $i++): ?>
-    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $i; ?>"><?php echo $i; ?></a></li>
+    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $i; ?>?nombre=<?php echo $nombre; ?>"><?php echo $i; ?></a></li>
     <?php endfor; ?>
         
-    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $next; ?>">Next</a></li>
+    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $next; ?>?nombre=<?php echo $nombre; ?>">Next</a></li>
   </ul>
 </nav>
 

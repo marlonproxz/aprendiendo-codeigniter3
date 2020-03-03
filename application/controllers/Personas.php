@@ -12,10 +12,10 @@ class Personas extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->database();
     }
-    
-    function llamar_helper(){
+
+    function llamar_helper() {
         $this->load->helper('list_person_helper');
-        
+
         //var_dump(list_person());
         $vdata["personas"] = list_person();
         $this->load->view('personas/llamar_helper', $vdata);
@@ -25,46 +25,51 @@ class Personas extends CI_Controller {
         //$this->session->set_userdata('item', 'PS4');
         //echo $this->session->userdata('item');
         //$this->session->set_flashdata('item', 'value');
-        
+
         redirect("/personas/listado");
     }
 
+    public function buscar_listado() {
+        redirect("/personas/listado/1?nombre=".$this->input->get("nombre"));
+    }
+
     public function listado($pag = 1) {
-        
+
         $pag--;
-        
-        if($pag < 0){
+
+        if ($pag < 0) {
             $pag = 0;
         }
-        
+
         $page_size = 2;
         $offset = $pag * $page_size;
-        
-        $nombre = $this->input->get("nombre");
-        
-        //echo $this->session->flashdata('item');
-        
-        /*$newdata = array(
-        'username'  => 'johndoe',
-        'email'     => 'johndoe@some-site.com',
-        'logged_in' => TRUE
-        );
 
-        $this->session->set_userdata($newdata);*/
-        
+        $nombre = $this->input->get("nombre");
+
+        //echo $this->session->flashdata('item');
+
+        /* $newdata = array(
+          'username'  => 'johndoe',
+          'email'     => 'johndoe@some-site.com',
+          'logged_in' => TRUE
+          );
+
+          $this->session->set_userdata($newdata); */
+
         //echo $this->session->userdata('name');
         //$this->session->unset_userdata('name');
-        
-        if($nombre != ""){
+
+        /*if ($nombre != "") {
             $offset = 0;
             $pag = 0;
-        }
-        
+        }*/
+
         $vdata["personas"] = $this->Persona->pagination($page_size, $offset, $nombre); //$this->Persona->search($nombre);
         $vdata["current_pag"] = $pag + 1;
+        $vdata["nombre"] = $nombre;
         $vdata["last_page"] = ceil($this->Persona->count($nombre) / $page_size);
         $view["view"] = $this->load->view('personas/listado', $vdata, TRUE);
-        
+
         $this->load->view('body', $view);
     }
 
@@ -103,19 +108,18 @@ class Personas extends CI_Controller {
                     $this->Persona->update($persona_id, $data);
                 } else
                     $persona_id = $this->Persona->insert($data);
-                
+
                 $error = $this->do_upload($persona_id);
-                
-                $this->session->set_flashdata('message', 'Guardado exitoso de '. $vdata["nombre"]);
-                if($error == "")
-                    
+
+                $this->session->set_flashdata('message', 'Guardado exitoso de ' . $vdata["nombre"]);
+                if ($error == "")
                     redirect("/personas/guardar/$persona_id");
-                    //redirect("/personas/listado");
+                //redirect("/personas/listado");
             }
         }
-        
+
         $vdata["error"] = $error;
-        
+
         $view["view"] = $this->load->view('personas/guardar', $vdata, TRUE);
         $this->load->view('body', $view);
     }
@@ -139,7 +143,7 @@ class Personas extends CI_Controller {
             //var_dump($data);
             $name = $data["file_name"];
             $save = array(
-                'image' =>  $name
+                'image' => $name
             );
             //var_dump($data);
             $this->Persona->update($persona_id, $save);
