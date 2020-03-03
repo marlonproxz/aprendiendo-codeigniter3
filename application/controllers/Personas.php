@@ -41,11 +41,13 @@ class Personas extends CI_Controller {
 
         $this->session->set_userdata($newdata);*/
         
-        echo $this->session->userdata('name');
-        $this->session->unset_userdata('name');
+        //echo $this->session->userdata('name');
+        //$this->session->unset_userdata('name');
         
         $vdata["personas"] = $this->Persona->findAll();
-        $this->load->view('personas/listado', $vdata);
+        $view["view"] = $this->load->view('personas/listado', $vdata, TRUE);
+        
+        $this->load->view('body', $view);
     }
 
     public function guardar($persona_id = null) {
@@ -84,17 +86,20 @@ class Personas extends CI_Controller {
                 } else
                     $persona_id = $this->Persona->insert($data);
                 
-                //$error = $this->do_upload($persona_id);
+                $error = $this->do_upload($persona_id);
                 
-                //if($error === "")
                 $this->session->set_flashdata('message', 'Guardado exitoso de '. $vdata["nombre"]);
-                //redirect("/personas/guardar/$persona_id");
-                redirect("/personas/listado");
+                if($error == "")
+                    
+                    redirect("/personas/guardar/$persona_id");
+                    //redirect("/personas/listado");
             }
         }
         
         $vdata["error"] = $error;
-        $this->load->view('personas/guardar', $vdata);
+        
+        $view["view"] = $this->load->view('personas/guardar', $vdata, TRUE);
+        $this->load->view('body', $view);
     }
 
     private function do_upload($persona_id) {
@@ -156,7 +161,8 @@ class Personas extends CI_Controller {
             $vdata["nombre"] = $vdata["apellido"] = $vdata["edad"] = "";
         }
 
-        $this->load->view('personas/ver', $vdata);
+        $view["view"] = $this->load->view('personas/ver', $vdata, TRUE);
+        $this->load->view('body', $view);
     }
 
 }
