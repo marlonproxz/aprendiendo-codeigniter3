@@ -24,12 +24,14 @@ class Personas extends CI_Controller {
     function index() {
         //$this->session->set_userdata('item', 'PS4');
         //echo $this->session->userdata('item');
-        $this->session->set_flashdata('item', 'value');
+        //$this->session->set_flashdata('item', 'value');
         
         redirect("/personas/listado");
     }
 
     public function listado() {
+        
+        $nombre = $this->input->get("nombre");
         
         //echo $this->session->flashdata('item');
         
@@ -44,7 +46,7 @@ class Personas extends CI_Controller {
         //echo $this->session->userdata('name');
         //$this->session->unset_userdata('name');
         
-        $vdata["personas"] = $this->Persona->findAll();
+        $vdata["personas"] = $this->Persona->search($nombre);
         $view["view"] = $this->load->view('personas/listado', $vdata, TRUE);
         
         $this->load->view('body', $view);

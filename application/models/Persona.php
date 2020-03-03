@@ -26,6 +26,15 @@ class Persona extends CI_Model{
         return $query->result();
     }
     
+    function search($nombre){
+        $this->db->select();
+        $this->db->from($this->table);
+        $this->db->like("nombre", $nombre);
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
     function insert($data){
         $this->db->insert($this->table, $data);
         return $this->db->insert_id();

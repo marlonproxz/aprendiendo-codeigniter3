@@ -2,6 +2,15 @@
 <a href="guardar" class="btn btn-success">Guardar</a>
 <br><br>
 
+<form method="get">
+    <div class="input-group mb-3">
+        <input name="nombre" type="text" class="form-control" placeholder="Recipient's username" aria-label="Filtrar" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Button</button>
+        </div>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
