@@ -54,11 +54,15 @@ class Personas extends CI_Controller {
         
         //echo $this->session->userdata('name');
         //$this->session->unset_userdata('name');
-
         
-        $vdata["personas"] = $this->Persona->pagination($page_size,$offset); //$this->Persona->search($nombre);
+        if($nombre != ""){
+            $offset = 0;
+            $pag = 0;
+        }
+        
+        $vdata["personas"] = $this->Persona->pagination($page_size, $offset, $nombre); //$this->Persona->search($nombre);
         $vdata["current_pag"] = $pag + 1;
-        $vdata["last_page"] = ceil($this->Persona->count() / $page_size);
+        $vdata["last_page"] = ceil($this->Persona->count($nombre) / $page_size);
         $view["view"] = $this->load->view('personas/listado', $vdata, TRUE);
         
         $this->load->view('body', $view);
