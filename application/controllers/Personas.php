@@ -31,6 +31,11 @@ class Personas extends CI_Controller {
 
     public function listado() {
         
+        //echo $this->Persona->count();
+        
+        $page_size = 2;
+        $offset = 0 * $page_size;
+        
         $nombre = $this->input->get("nombre");
         
         //echo $this->session->flashdata('item');
@@ -46,7 +51,7 @@ class Personas extends CI_Controller {
         //echo $this->session->userdata('name');
         //$this->session->unset_userdata('name');
         
-        $vdata["personas"] = $this->Persona->search($nombre);
+        $vdata["personas"] = $this->Persona->pagination($page_size,$offset); //$this->Persona->search($nombre);
         $view["view"] = $this->load->view('personas/listado', $vdata, TRUE);
         
         $this->load->view('body', $view);

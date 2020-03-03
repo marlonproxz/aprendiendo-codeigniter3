@@ -26,6 +26,24 @@ class Persona extends CI_Model{
         return $query->result();
     }
     
+    function pagination($pag_size, $offset){
+        $this->db->select();
+        $this->db->from($this->table);
+        
+        $this->db->limit($pag_size, $offset);
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+    function count(){
+        $this->db->select();
+        $this->db->from($this->table);
+        
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    
     function search($nombre){
         $this->db->select();
         $this->db->from($this->table);
