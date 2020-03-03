@@ -29,12 +29,16 @@ class Personas extends CI_Controller {
         redirect("/personas/listado");
     }
 
-    public function listado() {
+    public function listado($pag = 1) {
         
-        //echo $this->Persona->count();
+        $pag--;
+        
+        if($pag < 0){
+            $pag = 0;
+        }
         
         $page_size = 2;
-        $offset = 0 * $page_size;
+        $offset = $pag * $page_size;
         
         $nombre = $this->input->get("nombre");
         
@@ -50,8 +54,11 @@ class Personas extends CI_Controller {
         
         //echo $this->session->userdata('name');
         //$this->session->unset_userdata('name');
+
         
         $vdata["personas"] = $this->Persona->pagination($page_size,$offset); //$this->Persona->search($nombre);
+        $vdata["current_pag"] = $pag + 1;
+        $vdata["last_page"] = ceil($this->Persona->count() / $page_size);
         $view["view"] = $this->load->view('personas/listado', $vdata, TRUE);
         
         $this->load->view('body', $view);

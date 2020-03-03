@@ -44,6 +44,34 @@
     </tbody>
 </table>
 
+<nav>
+  <ul class="pagination">
+    
+    <?php 
+        $prev = $current_pag-1;
+        $next = $current_pag+1;
+        
+        if($prev <= 0){
+            $prev = 1;
+        }
+        
+        if($next > $last_page){
+            $next = $last_page;
+        }
+        
+        
+    ?>  
+      
+    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $prev; ?>">Previous</a></li>
+    
+    <?php for($i=1; $i<= $last_page; $i++): ?>
+    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $i; ?>"><?php echo $i; ?></a></li>
+    <?php endfor; ?>
+        
+    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $next; ?>">Next</a></li>
+  </ul>
+</nav>
+
 <div class="modal fade" id="DeletePerson" tabindex="-1" role="dialog" aria-labelledby="DeletePersonLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
