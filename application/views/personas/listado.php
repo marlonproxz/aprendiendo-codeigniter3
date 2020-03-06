@@ -4,7 +4,7 @@
 
 <form method="get" action="<?php echo base_url();?>personas/buscar_listado">
     <div class="input-group mb-3">
-        <input name="nombre" type="text" value="<?php echo $nombre; ?>" class="form-control" placeholder="Buscar." aria-label="Filtrar">
+        <input name="general_search" type="text" value="<?php echo $general_search; ?>" class="form-control" placeholder="Buscar." aria-label="Filtrar">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="submit">Enviar</button>
         </div>
@@ -62,13 +62,13 @@
         
     ?>  
       
-    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $prev; ?>?nombre=<?php echo $nombre; ?>">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $prev; ?>?general_search=<?php echo $general_search; ?>">Previous</a></li>
     
     <?php for($i=1; $i<= $last_page; $i++): ?>
-    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $i; ?>?nombre=<?php echo $nombre; ?>"><?php echo $i; ?></a></li>
+    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $i; ?>?general_search=<?php echo $general_search; ?>"><?php echo $i; ?></a></li>
     <?php endfor; ?>
         
-    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $next; ?>?nombre=<?php echo $nombre; ?>">Next</a></li>
+    <li class="page-item"><a class="page-link" href="<?php echo base_url(). "personas/listado/". $next; ?>?general_search=<?php echo $general_search; ?>">Next</a></li>
   </ul>
 </nav>
 

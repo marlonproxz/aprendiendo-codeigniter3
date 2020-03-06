@@ -26,25 +26,37 @@ class Persona extends CI_Model{
         return $query->result();
     }
     
-    function pagination($pag_size, $offset, $nombre){
+    function pagination($pag_size, $offset, $general_search){
         $this->db->select();
         $this->db->from($this->table);
         
         $this->db->limit($pag_size, $offset);
         
-        if($nombre != "")
-            $this->db->like("nombre", $nombre);
+        if($general_search != ""){
+            $this->db->group_start();
+            $this->db->or_like("nombre", $general_search);
+            $this->db->or_like("apellido", $general_search);
+            $this->db->or_like("edad", $general_search);
+            $this->db->group_end();
+        }
+        
+        //$this->db->where($this->table_id, 1);
         
         $query = $this->db->get();
         return $query->result();
     }
     
-    function count($nombre){
+    function count($general_search){
         $this->db->select();
         $this->db->from($this->table);
         
-        if($nombre != "")
-            $this->db->like("nombre", $nombre);
+        if($general_search != ""){
+            $this->db->group_start();
+            $this->db->or_like("nombre", $general_search);
+            $this->db->or_like("apellido", $general_search);
+            $this->db->or_like("edad", $general_search);
+            $this->db->group_end();
+        }
         
         $query = $this->db->get();
         return $query->num_rows();

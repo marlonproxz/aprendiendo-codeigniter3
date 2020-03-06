@@ -30,7 +30,7 @@ class Personas extends CI_Controller {
     }
 
     public function buscar_listado() {
-        redirect("/personas/listado/1?nombre=".$this->input->get("nombre"));
+        redirect("/personas/listado/1?general_search=".$this->input->get("general_search"));
     }
 
     public function listado($pag = 1) {
@@ -44,7 +44,7 @@ class Personas extends CI_Controller {
         $page_size = 2;
         $offset = $pag * $page_size;
 
-        $nombre = $this->input->get("nombre");
+        $general_search = $this->input->get("general_search");
 
         //echo $this->session->flashdata('item');
 
@@ -64,10 +64,10 @@ class Personas extends CI_Controller {
             $pag = 0;
         }*/
 
-        $vdata["personas"] = $this->Persona->pagination($page_size, $offset, $nombre); //$this->Persona->search($nombre);
+        $vdata["personas"] = $this->Persona->pagination($page_size, $offset, $general_search); //$this->Persona->search($nombre);
         $vdata["current_pag"] = $pag + 1;
-        $vdata["nombre"] = $nombre;
-        $vdata["last_page"] = ceil($this->Persona->count($nombre) / $page_size);
+        $vdata["general_search"] = $general_search;
+        $vdata["last_page"] = ceil($this->Persona->count($general_search) / $page_size);
         $view["view"] = $this->load->view('personas/listado', $vdata, TRUE);
 
         $this->load->view('body', $view);
