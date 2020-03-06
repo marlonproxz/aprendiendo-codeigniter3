@@ -67,7 +67,7 @@ class Personas extends CI_Controller {
             $pag = 0;
         }*/
 
-        $vdata["personas"] = $this->Persona->pagination($page_size, $offset, $general_search); //$this->Persona->search($nombre);
+        $vdata["personas"] = $this->Persona->pagination($page_size, $offset, $general_search, $col_nombre); //$this->Persona->search($nombre);
         $vdata["current_pag"] = $pag + 1;
         $vdata["general_search"] = $general_search;
         $vdata["col_nombre"] = $col_nombre;
