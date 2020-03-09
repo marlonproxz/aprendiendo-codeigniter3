@@ -67,15 +67,17 @@
         if ($next > $last_page) {
             $next = $last_page;
         }
+
+        $url_get = "?general_search=$general_search&col_nombre=$col_nombre&col_apellido=$col_apellido&col_edad=$col_edad";
         ?>  
 
-        <li class="page-item"><a class="page-link" href="<?php echo base_url() . "personas/listado/" . $prev; ?>?general_search=<?php echo $general_search; ?>">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="<?php echo base_url() . "personas/listado/" . $prev . $url_get ?>">Previous</a></li>
 
-<?php for ($i = 1; $i <= $last_page; $i++): ?>
-            <li class="page-item"><a class="page-link" href="<?php echo base_url() . "personas/listado/" . $i; ?>?general_search=<?php echo $general_search; ?>"><?php echo $i; ?></a></li>
+        <?php for ($i = 1; $i <= $last_page; $i++): ?>
+            <li class="page-item"><a class="page-link" href="<?php echo base_url() . "personas/listado/" . $i . $url_get ?>"><?php echo $i; ?></a></li>
         <?php endfor; ?>
 
-        <li class="page-item"><a class="page-link" href="<?php echo base_url() . "personas/listado/" . $next; ?>?general_search=<?php echo $general_search; ?>">Next</a></li>
+        <li class="page-item"><a class="page-link" href="<?php echo base_url() . "personas/listado/" . $next . $url_get ?>">Next</a></li>
     </ul>
 </nav>
 
