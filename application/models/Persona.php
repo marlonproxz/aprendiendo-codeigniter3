@@ -32,18 +32,24 @@ class Persona extends CI_Model{
         
         $this->db->limit($pag_size, $offset);
         
-        if($general_search != "" || $col_nombre != "" || $col_apellido != "" || $col_edad != ""){
+        if($col_nombre != "" || $col_apellido != "" || $col_edad != ""){
             $this->db->group_start();
             
-            if($general_search != "" || $col_nombre != "")
-                $this->db->or_like("nombre", 
-                        $col_nombre != "" ? $col_nombre : $general_search);
-            if($general_search != "" || $col_apellido != "")
-                $this->db->or_like("apellido", 
-                        $col_apellido != "" ? $col_apellido : $general_search);
-            if($general_search != "" || $col_edad != "")
-                $this->db->or_like("edad", 
-                        $col_edad != "" ? $col_edad : $general_search);
+            if($col_nombre != "")
+                $this->db->like("nombre", $col_nombre);
+            if($col_apellido != "")
+                $this->db->like("apellido", $col_apellido);
+            if($col_edad != "")
+                $this->db->like("edad", $col_edad);
+            $this->db->group_end();
+            
+        } else if($general_search != ""){
+            $this->db->group_start();
+            
+                $this->db->or_like("nombre", $general_search);
+                $this->db->or_like("apellido", $general_search);
+                $this->db->or_like("edad", $general_search);
+                
             $this->db->group_end();
         }
         
