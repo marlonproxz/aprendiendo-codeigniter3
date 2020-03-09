@@ -26,11 +26,9 @@ class Persona extends CI_Model{
         return $query->result();
     }
     
-    function pagination($pag_size, $offset, $general_search, $col_nombre, $col_apellido, $col_edad){
+    function getList($pag_size, $offset, $general_search, $col_nombre, $col_apellido, $col_edad, $pag = true){
         $this->db->select();
         $this->db->from($this->table);
-        
-        $this->db->limit($pag_size, $offset);
         
         if($col_nombre != "" || $col_apellido != "" || $col_edad != ""){
             $this->db->group_start();
@@ -46,20 +44,26 @@ class Persona extends CI_Model{
         } else if($general_search != ""){
             $this->db->group_start();
             
-                $this->db->or_like("nombre", $general_search);
-                $this->db->or_like("apellido", $general_search);
-                $this->db->or_like("edad", $general_search);
+            $this->db->or_like("nombre", $general_search);
+            $this->db->or_like("apellido", $general_search);
+            $this->db->or_like("edad", $general_search);
                 
             $this->db->group_end();
         }
         
+        if($pag)
+           $this->db->limit($pag_size, $offset); 
+           
         //$this->db->where($this->table_id, 1);
         
         $query = $this->db->get();
-        return $query->result();
+        if($pag)
+            return $query->result();
+        else
+            return $query->num_rows();
     }
     
-    function count($general_search){
+    /*function count($general_search){
         $this->db->select();
         $this->db->from($this->table);
         
@@ -73,7 +77,7 @@ class Persona extends CI_Model{
         
         $query = $this->db->get();
         return $query->num_rows();
-    }
+    }*/
     
     function search($nombre){
         $this->db->select();
